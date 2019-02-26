@@ -1,6 +1,7 @@
 import praw
 import re
 import time
+import math
 
 errors = 0;
 
@@ -26,9 +27,11 @@ def process_submission(submission, reddit, subreddit_title):
         for post in reddit.subreddit(subreddit_title).search(submission.title):
             print("searching...")
             try:
+                words_in_title = len(re.sub("[^\w]", " ", submission.title).split())
                 if post.id != submission.id and \
                         len(post.comments) > 0 and \
-                        checkRelevant(submission.title, post.title) > len(re.sub("[^\w]", " ", submission.title).split())-3 and \
+                        words_in_title > 2 and \
+                        checkRelevant(submission.title, post.title) > words_in_title-math.log10(math.log10(words_in_title)^2)*1.5 and \
                         post.comments[0].author.name != 'AutoModerator' and \
                         post.created_utc != submission.created_utc:
                     comment = post.comments[0].body
