@@ -7,11 +7,7 @@ errors = 0;
 
 
 def main():
-    reddit = praw.Reddit(client_id='ZIkkm7m7ePhpHQ',
-                         client_secret='Q-zbPbonLkm4vl-bHYSpPLVOMfQ',
-                         user_agent='<console:the_one_true_red:0.0.1 (by /u/the_one_true_red)>',
-                         username='the_one_true_red',
-                         password='maroon')
+   
     subreddit_title = 'Showerthoughts'
 
     subreddit = reddit.subreddit(subreddit_title)
